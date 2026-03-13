@@ -18,6 +18,11 @@ world="$3"
 src_path="$4"
 build_path="$5"
 
+# Allow external override for scene/world (e.g. flat-earth runs)
+if [[ -n "${PX4_SIM_WORLD:-}" ]]; then
+	world="${PX4_SIM_WORLD}"
+fi
+
 echo SITL ARGS
 
 echo sitl_bin: $sitl_bin
@@ -68,7 +73,7 @@ export JSBSIM_AIRCRAFT_MODEL="$MODEL_NAME"
 
 scene_world="$world"
 if [[ "$scene_world" == "none" ]]; then
-	scene_world="LSZH"
+	scene_world="FLAT"
 fi
 scene_file="${src_path}/Tools/simulation/jsbsim/jsbsim_bridge/scene/${scene_world}.xml"
 
