@@ -18,6 +18,12 @@ elif [ "$PX4_SIMULATOR" = "gz" ] || [ "$(param show -q SIM_GZ_EN)" = "1" ]; then
 elif [ "$PX4_SIM_MODEL" = "jmavsim_iris" ] || [ "$(param show -q SYS_AUTOSTART)" -eq "10017" ]; then
     # Run jMAVSim
     . px4-rc.jmavsim
+elif [ "$PX4_SIMULATOR" = "flightgear" ]; then
+    echo "INFO [simulator] Using FlightGear bridge"
+
+    simulator start -s flightgear \
+        -u 5503 \
+        -h host.docker.internal
 
 else
     # Run simulator_mavlink module for interface with gazebo-classic
